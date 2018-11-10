@@ -55,17 +55,17 @@ const weatherData = {
   ]
 };
 
-let element = document.getElementById("main"),
+const element = document.getElementById("main"),
   dayInWeek = document.getElementsByClassName("dayInWeek")[0],
   wetherIcon = document.getElementsByClassName("wetherIcon")[0],
   temperature = document.getElementsByClassName("temperature")[0],
   windSpeeds = document.getElementsByClassName("windSpeed")[0],
   windDirections = document.getElementsByClassName("windDirections")[0],
-  modal = document.getElementById("modal-content"),
+  modal = document.getElementById("modal"),
   close = document.getElementsByClassName("close")[0];
 
 weatherData.week.forEach(day => {
-  let eachDay = document.createElement("li");
+  const eachDay = document.createElement("li");
   eachDay.classList.add(day.day);
 
   eachDay.addEventListener("click", function() {
@@ -97,7 +97,8 @@ function openModal(day, type, temp, windSpeed, windDirection) {
 }
 
 window.onclick = function(event) {
-    if (event.target == close) {
+console.log(event.target);
+    if (event.target === modal || event.target === close) {
         modal.style.display = "none";
     }
 }

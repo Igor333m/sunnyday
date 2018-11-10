@@ -1,33 +1,34 @@
+/* Modal Content/Box */
 #modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: none;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: mistyrose;
 }
 
-/* Modal Content/Box */
 #modal-content {
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: 50%;
+    height: 50%;
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 50px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-    display: none;
-    background-color: grey;
 }
 
 /* The Close Button */
 .close {
     color: #aaa;
+    position: relative;
+    display: block;
     float: right;
-    font-size: 28px;
+    text-align: center;
+    width: 1.2em;
+    font-size: 37px;
     font-weight: bold;
+
 }
 
 .close:hover,
