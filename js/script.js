@@ -55,8 +55,9 @@ const weatherData = {
   ]
 };
 
-// Get current location
+let fccWeatherData = null;
 
+// Get current location
 if ("geolocation" in navigator) {
   navigator.geolocation.getCurrentPosition(function(position) {
     const curentPosition = {
@@ -66,14 +67,17 @@ if ("geolocation" in navigator) {
     console.log(curentPosition.latitude);
     console.log(curentPosition.longitude);
 
-    const weatherData = null;
-    // Free code camp Weather api
+    /*
+    * Free code camp Weather api
+    * Fcc endpoint example 'https://fcc-weather-api.glitch.me/api/current?lat=35&lon=139
+    */
     const urlWeatheMap = 'https://fcc-weather-api.glitch.me/api/current'; //?lat=35&lon=139
 
     fetch(`${urlWeatheMap}?lat=${curentPosition.latitude}&lon=${curentPosition.longitude}`)
-      .then(data => {return data})
+      .then(data => {return data.json()})
       .then(res => {
-        console.log(res)
+        console.log(res);
+        fccWeatherData = res;
         
       })
       .catch(err => console.log(err))
@@ -89,7 +93,6 @@ if ("geolocation" in navigator) {
     //   .catch(err => console.log(err))
     
     // console.log(`${urlWeatheMap}?=${city}&APPID=799d024701320e733102ddfe7106d53c`);
-    return weatherData;
   })
 } else {
   alert('geolocation IS NOT available');
