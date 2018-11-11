@@ -55,6 +55,28 @@ const weatherData = {
   ]
 };
 
+// Get current location
+let latitude;
+let longitude;
+navigator.geolocation.getCurrentPosition(function(position) {
+  latitude = position.coords.latitude;
+  longitude = position.coords.longitude;
+})
+
+
+console.log(latitude, longitude);
+
+const urlWeatheMap = 'http://api.openweathermap.org/data/2.5/weather';
+
+const city = 'Los Angeles,US';
+
+fetch(`${urlWeatheMap}?=${city}&APPID=799d024701320e733102ddfe7106d53c`)
+  .then(data => {return data})
+  .then(res => console.log(res))
+  .catch(err => console.log(err))
+
+console.log(`${urlWeatheMap}?=${city}&APPID=799d024701320e733102ddfe7106d53c`);
+
 const element = document.getElementById("main"),
   dayInWeek = document.getElementsByClassName("dayInWeek")[0],
   wetherIcon = document.getElementsByClassName("wetherIcon")[0],
