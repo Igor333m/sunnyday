@@ -66,12 +66,16 @@ if ("geolocation" in navigator) {
     console.log(curentPosition.latitude);
     console.log(curentPosition.longitude);
 
+    const weatherData = null;
     // Free code camp Weather api
     const urlWeatheMap = 'https://fcc-weather-api.glitch.me/api/current'; //?lat=35&lon=139
 
     fetch(`${urlWeatheMap}?lat=${curentPosition.latitude}&lon=${curentPosition.longitude}`)
       .then(data => {return data})
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res)
+        
+      })
       .catch(err => console.log(err))
 
     // Openweathermap.org api
@@ -85,7 +89,7 @@ if ("geolocation" in navigator) {
     //   .catch(err => console.log(err))
     
     // console.log(`${urlWeatheMap}?=${city}&APPID=799d024701320e733102ddfe7106d53c`);
-
+    return weatherData;
   })
 } else {
   alert('geolocation IS NOT available');
