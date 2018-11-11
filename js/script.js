@@ -56,26 +56,40 @@ const weatherData = {
 };
 
 // Get current location
-let latitude;
-let longitude;
-navigator.geolocation.getCurrentPosition(function(position) {
-  latitude = position.coords.latitude;
-  longitude = position.coords.longitude;
-})
 
+if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    const curentPosition = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    }
+    console.log(curentPosition.latitude);
+    console.log(curentPosition.longitude);
 
-console.log(latitude, longitude);
+    // Free code camp Weather api
+    const urlWeatheMap = 'https://fcc-weather-api.glitch.me/api/current'; //?lat=35&lon=139
 
-const urlWeatheMap = 'http://api.openweathermap.org/data/2.5/weather';
+    fetch(`${urlWeatheMap}?lat=${curentPosition.latitude}&lon=${curentPosition.longitude}`)
+      .then(data => {return data})
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
 
-const city = 'Los Angeles,US';
+    // Openweathermap.org api
+    // const urlWeatheMap = 'http://api.openweathermap.org/data/2.5/weather';
 
-fetch(`${urlWeatheMap}?=${city}&APPID=799d024701320e733102ddfe7106d53c`)
-  .then(data => {return data})
-  .then(res => console.log(res))
-  .catch(err => console.log(err))
+    // const city = 'Los Angeles,US';
+    
+    // fetch(`${urlWeatheMap}?=${city}&APPID=799d024701320e733102ddfe7106d53c`)
+    //   .then(data => {return data})
+    //   .then(res => console.log(res))
+    //   .catch(err => console.log(err))
+    
+    // console.log(`${urlWeatheMap}?=${city}&APPID=799d024701320e733102ddfe7106d53c`);
 
-console.log(`${urlWeatheMap}?=${city}&APPID=799d024701320e733102ddfe7106d53c`);
+  })
+} else {
+  alert('geolocation IS NOT available');
+}
 
 const element = document.getElementById("main"),
   dayInWeek = document.getElementsByClassName("dayInWeek")[0],
