@@ -70,29 +70,30 @@ if ("geolocation" in navigator) {
     /*
     * Free code camp Weather api
     * Fcc endpoint example 'https://fcc-weather-api.glitch.me/api/current?lat=35&lon=139
+    * Fetch data with lat&lon
     */
-    const urlWeatheMap = 'https://fcc-weather-api.glitch.me/api/current'; //?lat=35&lon=139
+    const urlWeatherMap = 'https://fcc-weather-api.glitch.me/api/current'; //?lat=35&lon=139
 
-    fetch(`${urlWeatheMap}?lat=${curentPosition.latitude}&lon=${curentPosition.longitude}`)
+    fetch(`${urlWeatherMap}?lat=${curentPosition.latitude}&lon=${curentPosition.longitude}`)
       .then(data => {return data.json()})
       .then(res => {
-        console.log(res);
+        console.log("Fcc data", res);
         fccWeatherData = res;
         
       })
       .catch(err => console.log(err))
 
-    // Openweathermap.org api
-    // const urlWeatheMap = 'http://api.openweathermap.org/data/2.5/weather';
-
-    // const city = 'Los Angeles,US';
+    /*
+    * Openweathermap.org api
+    * Fcc endpoint example "api.openweathermap.org/data/2.5/forecast?lat=35&lon=139"
+    * Fetch data with lat&lon
+    */
+    const OpenWeatherUrlWeatherMap = 'http://api.openweathermap.org/data/2.5/forecast&APPID=11111111111111111111111';
     
-    // fetch(`${urlWeatheMap}?=${city}&APPID=799d024701320e733102ddfe7106d53c`)
-    //   .then(data => {return data})
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err))
-    
-    // console.log(`${urlWeatheMap}?=${city}&APPID=799d024701320e733102ddfe7106d53c`);
+    fetch(`${OpenWeatherUrlWeatherMap}?lat=${curentPosition.latitude}&lon=${curentPosition.longitude}&APPID=799d024701320e733102ddfe7106d53c`)
+      .then(data => {return data.json()})
+      .then(res => console.log("Open Weather data", res))
+      .catch(err => console.log(err))
   })
 } else {
   alert('geolocation IS NOT available');
