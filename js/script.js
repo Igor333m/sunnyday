@@ -56,6 +56,7 @@ const weatherData = {
 };
 
 let fccWeatherData = null;
+let openWeather5dayData = null;
 
 // Get current location
 if ("geolocation" in navigator) {
@@ -92,7 +93,10 @@ if ("geolocation" in navigator) {
     
     fetch(`${OpenWeatherUrlWeatherMap}?lat=${curentPosition.latitude}&lon=${curentPosition.longitude}&APPID=799d024701320e733102ddfe7106d53c`)
       .then(data => {return data.json()})
-      .then(res => console.log("Open Weather data", res))
+      .then(res => {
+        console.log("Open Weather data", res);
+        openWeather5dayData = res;
+      })
       .catch(err => console.log(err))
   })
 } else {
@@ -108,7 +112,7 @@ const element = document.getElementById("main"),
   modal = document.getElementById("modal"),
   close = document.getElementsByClassName("close")[0];
 
-weatherData.week.forEach(day => {
+openWeather5dayData.list.week.forEach(day => {
   const eachDay = document.createElement("li");
   eachDay.classList.add(day.day);
 
@@ -117,9 +121,7 @@ weatherData.week.forEach(day => {
   	openModal(day.day, day.type, day.temp, day.windSpeed, day.windDirection);
   });
   
-  eachDay.innerHTML = `<span class='day'>${day.day}</span><span class='temp'>${
-    day.temp
-  }</span>`;
+  eachDay.innerHTML = `<span class='day'>${day.dt}</span><span class='temp'>${day.main.temp}</span>`;
   element.appendChild(eachDay);
 });
 
