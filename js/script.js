@@ -85,10 +85,10 @@ if ("geolocation" in navigator) {
 
     /*
     * Openweathermap.org api
-    * Fcc endpoint example "api.openweathermap.org/data/2.5/forecast?lat=35&lon=139"
+    * Openweathermap 5 day endpoint example "http://api.openweathermap.org/data/2.5/forecast?lat=113.2&lon=23.6&APPID=111111111111111111111"
     * Fetch data with lat&lon
     */
-    const OpenWeatherUrlWeatherMap = 'http://api.openweathermap.org/data/2.5/forecast&APPID=11111111111111111111111';
+    const OpenWeatherUrlWeatherMap = 'https://api.openweathermap.org/data/2.5/forecast';
     
     fetch(`${OpenWeatherUrlWeatherMap}?lat=${curentPosition.latitude}&lon=${curentPosition.longitude}&APPID=799d024701320e733102ddfe7106d53c`)
       .then(data => {return data.json()})
