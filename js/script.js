@@ -102,7 +102,7 @@ if ("geolocation" in navigator) {
     fetch(`${OpenWeatherUrlWeatherMap}?lat=${curentPosition.latitude}&lon=${curentPosition.longitude}&APPID=799d024701320e733102ddfe7106d53c`)
       .then(data => {return data.json()})
       .then(results => {
-        //console.log("Open Weather data", results);
+        console.log("Open Weather data", results);
         openWeather5dayData = results;
       })
       .catch(err => console.log(err))
@@ -112,15 +112,20 @@ if ("geolocation" in navigator) {
 }
 
 function showToday(weatherData) {
-  console.log("Fcc data: ", weatherData);
+  // console.log("Fcc data: ", weatherData);
   const date = new Date();
 
   var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  console.log("date: ", days[date.getDay()]);
   const today = days[date.getDay()];
-  //openModal(today)
+  const currentTemp = Math.round(weatherData.main.temp);
+  const windSpeed = weatherData.wind.speed;
+  const windDirections = weatherData.wind.deg;
+  //openModal(today, currentTemp, windSpeed, windDirections)
 
 }
+
+console.log("currentTemp: ", Math.round(currentTemp));
+
 
 openWeather5dayData.list.week.forEach(day => {
   const eachDay = document.createElement("li");
@@ -143,9 +148,9 @@ function windArrow(direction) {
   }
 }
 
-function openModal(day, type, temp, windSpeed, windDirection) {
+function openModal(day, temp, windSpeed, windDirection) {
  	dayInWeek.innerText = day;
-  wetherIcon.innerText = type;
+  //wetherIcon.innerText = type;
   temperature.innerText = temp;
   windSpeeds.innerText = `WindSpeed ${windSpeed}`;
   windDirections.innerText = windDirection;
