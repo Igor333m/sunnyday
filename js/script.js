@@ -116,12 +116,15 @@ function showToday(openWeatherToday) {
   const date = new Date();
   var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   console.log("openWeatherToday: ", openWeatherToday);
-  const today = days[date.getDay()];
-  const currentTemp = Math.round(openWeatherToday.main.temp);
-  const windSpeed = openWeatherToday.wind.speed;
-  const windDirections = openWeatherToday.wind.deg;
+  const today = `<span class="today">${days[date.getDay()]}</span>`;
+
+  // Convert Kelvin to Celsius
+  const currentTemp = `<span class="current-temp">Current temperature ${Math.round(openWeatherToday.main.temp - 273.15)}&deg;C</span>`;
+  const weatherIcon = `<span class="weather-icon">${openWeatherToday.weather[0].main}<span>`;
+  const humidity = `<span class="humidity">Humidity ${openWeatherToday.main.humidity}%</span>`;
+  const windSpeed = `<span class="wind-speed">Wind Speed ${openWeatherToday.wind.speed}m/s</span>`;
   cityName.innerHTML = openWeatherToday.name;
-  main.innerHTML = `<span class="today">${today}</span><span class="current-temp">${currentTemp}</span><span class="wind-speed">${windSpeed}</span><span class="wind-directions">${windDirections}</span>`;
+  main.innerHTML = `${today}${currentTemp}${weatherIcon}${humidity}${windSpeed}`;
 }
 
 console.log("currentTemp: ", Math.round(currentTemp));
