@@ -55,18 +55,28 @@ const weatherData = {
   ]
 };
 
-let fccWeatherData = null;
-let openWeather5dayData = null;
+
+
+const element = document.getElementById("main"),
+  dayInWeek = document.getElementsByClassName("dayInWeek")[0],
+  wetherIcon = document.getElementsByClassName("wetherIcon")[0],
+  temperature = document.getElementsByClassName("temperature")[0],
+  windSpeeds = document.getElementsByClassName("windSpeed")[0],
+  windDirections = document.getElementsByClassName("windDirections")[0],
+  modal = document.getElementById("modal"),
+  close = document.getElementsByClassName("close")[0];
 
 // Get current location
 if ("geolocation" in navigator) {
   navigator.geolocation.getCurrentPosition(function(position) {
+
+    let openWeather5dayData = null;
+
     const curentPosition = {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude
     }
-    console.log(curentPosition.latitude);
-    console.log(curentPosition.longitude);
+
 
     /*
     * Free code camp Weather api
@@ -77,10 +87,8 @@ if ("geolocation" in navigator) {
 
     fetch(`${urlWeatherMap}?lat=${curentPosition.latitude}&lon=${curentPosition.longitude}`)
       .then(data => {return data.json()})
-      .then(res => {
-        console.log("Fcc data", res);
-        fccWeatherData = res;
-        
+      .then(results => {
+        showToday(results);
       })
       .catch(err => console.log(err))
 
@@ -93,9 +101,9 @@ if ("geolocation" in navigator) {
     
     fetch(`${OpenWeatherUrlWeatherMap}?lat=${curentPosition.latitude}&lon=${curentPosition.longitude}&APPID=799d024701320e733102ddfe7106d53c`)
       .then(data => {return data.json()})
-      .then(res => {
-        console.log("Open Weather data", res);
-        openWeather5dayData = res;
+      .then(results => {
+        //console.log("Open Weather data", results);
+        openWeather5dayData = results;
       })
       .catch(err => console.log(err))
   })
@@ -103,14 +111,16 @@ if ("geolocation" in navigator) {
   alert('geolocation IS NOT available');
 }
 
-const element = document.getElementById("main"),
-  dayInWeek = document.getElementsByClassName("dayInWeek")[0],
-  wetherIcon = document.getElementsByClassName("wetherIcon")[0],
-  temperature = document.getElementsByClassName("temperature")[0],
-  windSpeeds = document.getElementsByClassName("windSpeed")[0],
-  windDirections = document.getElementsByClassName("windDirections")[0],
-  modal = document.getElementById("modal"),
-  close = document.getElementsByClassName("close")[0];
+function showToday(weatherData) {
+  console.log("Fcc data: ", weatherData);
+  const date = new Date();
+
+  var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  console.log("date: ", days[date.getDay()]);
+  const today = days[date.getDay()];
+  //openModal(today)
+
+}
 
 openWeather5dayData.list.week.forEach(day => {
   const eachDay = document.createElement("li");
